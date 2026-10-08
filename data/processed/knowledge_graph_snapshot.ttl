@@ -1,0 +1,94 @@
+@prefix bywater: <http://w3id.org/belarus/water-quality#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bywater:Alert_Assessment_BY_LAKE_001_20250721 a bywater:EarlyWarningAlert ;
+    bywater:alertLevel "YELLOW"^^xsd:string ;
+    bywater:explanationReason "Повышенная концентрация хлорофилла-a (5.2 мкг/л) с тенденцией к росту. | Температурный режим (20.1°C) благоприятен для активной вегетации фитопланктона."^^xsd:string ;
+    bywater:recommendedAction "Увеличить частоту спутникового оптического скрининга (Sentinel-2 / Copernicus LWQ). | Провести гидрохимический экспресс-замер растворенного кислорода и pH на контрольных станциях."^^xsd:string .
+
+bywater:Alert_Assessment_BY_RES_001_20250721 a bywater:EarlyWarningAlert ;
+    bywater:alertLevel "RED"^^xsd:string ;
+    bywater:explanationReason "Прогнозируемая концентрация хлорофилла-a (34.5 мкг/л) превышает санитарно-экологический порог эвтрофикации (25 мкг/л). | Модельная вероятность массового цветения цианобактерий составляет 88.0%. | Штилевые условия (55% дней без ветра) стимулируют концентрацию колоний в поверхностном слое. | Высокий прогрев водной массы (средняя T за 14 дней = 22.4°C) ускоряет вегетацию."^^xsd:string ;
+    bywater:recommendedAction "Усилить лабораторный контроль: внеплановый отбор проб на цианотоксины (микроцистины). | Уведомить территориальные органы Минприроды и санэпиднадзора о риске цветения. | Рекомендовать ограничение рекреационного водопользования на пляжных зонах."^^xsd:string .
+
+bywater:Assessment_BY_LAKE_001_20250721 a bywater:EutrophicationAssessment ;
+    bywater:forWaterBody bywater:BY_LAKE_001 ;
+    bywater:hasBloomProbability "0.03"^^xsd:float ;
+    bywater:hasPredictedChlA "5.2"^^xsd:float ;
+    bywater:hasTrophicIndex "46.8"^^xsd:float .
+
+bywater:Assessment_BY_RES_001_20250721 a bywater:EutrophicationAssessment ;
+    bywater:forWaterBody bywater:BY_RES_001 ;
+    bywater:hasBloomProbability "0.88"^^xsd:float ;
+    bywater:hasPredictedChlA "34.5"^^xsd:float ;
+    bywater:hasTrophicIndex "65.3"^^xsd:float .
+
+bywater:Ontology a owl:Ontology ;
+    rdfs:label "Онтология качества поверхностных вод и риска эвтрофикации (Беларусь)" ;
+    rdfs:comment "Основана на W3C SOSA/SSN, нормах СанПиН РБ и трофическом индексе Карлсона." ;
+    owl:versionInfo "1.0.0" .
+
+bywater:TrophicClass a owl:Class ;
+    rdfs:label "Трофический класс водного объекта" .
+
+bywater:alertLevel a owl:DatatypeProperty ;
+    rdfs:label "Уровень тревоги (GREEN, YELLOW, RED)" ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string .
+
+bywater:explanationReason a owl:DatatypeProperty ;
+    rdfs:label "Семантическое объяснение причин тревоги" ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string .
+
+bywater:forWaterBody a owl:ObjectProperty ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range bywater:WaterBody .
+
+bywater:hasBloomProbability a owl:DatatypeProperty ;
+    rdfs:label "Модельная вероятность наступления цветения" ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float .
+
+bywater:hasPredictedChlA a owl:DatatypeProperty ;
+    rdfs:label "Прогнозируемая концентрация хлорофилла-a (мкг/л)" ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float .
+
+bywater:hasTrophicIndex a owl:DatatypeProperty ;
+    rdfs:label "Трофический индекс Карлсона (TSI)" ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float .
+
+bywater:recommendedAction a owl:DatatypeProperty ;
+    rdfs:label "Рекомендованные природоохранные и санитарные действия" ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string .
+
+bywater:BY_LAKE_001 a bywater:Lake ;
+    rdfs:label "Озеро Нарочь"@ru .
+
+bywater:BY_RES_001 a bywater:Reservoir ;
+    rdfs:label "Заславское водохранилище (Минское море)"@ru .
+
+bywater:Lake a owl:Class ;
+    rdfs:label "Озеро" ;
+    rdfs:subClassOf bywater:WaterBody .
+
+bywater:Reservoir a owl:Class ;
+    rdfs:label "Водохранилище" ;
+    rdfs:subClassOf bywater:WaterBody .
+
+bywater:WaterBody a owl:Class ;
+    rdfs:label "Водный объект" .
+
+bywater:EarlyWarningAlert a owl:Class ;
+    rdfs:label "Предупреждение системы раннего оповещения" .
+
+bywater:EutrophicationAssessment a owl:Class ;
+    rdfs:label "Оценка риска эвтрофикации" ;
+    rdfs:subClassOf sosa:Observation .
+

@@ -1,0 +1,51 @@
+{
+  "dataset_split": {
+    "train_period": "2020-01-01 to 2023-12-31",
+    "test_period": "2024-01-01 to 2025-12-31",
+    "train_samples": 288,
+    "test_samples": 142
+  },
+  "regression_results": {
+    "naive_baseline": {
+      "rmse": 5.123886825173161,
+      "mae": 2.921901408450704,
+      "r2": 0.7612910164887507
+    },
+    "ridge_regression": {
+      "rmse": 4.516693886476511,
+      "mae": 3.035762731588058,
+      "r2": 0.814514048700293
+    },
+    "lightgbm_regressor": {
+      "rmse": 3.639817699939809,
+      "mae": 2.2017942713335708,
+      "r2": 0.8795438518974625
+    },
+    "top_features_importance": {
+      "turbidity_current": 142.0,
+      "cos_doy": 112.0,
+      "radiation_mean_7d": 90.0,
+      "chl_a_current": 73.0,
+      "temp_max_7d": 57.0,
+      "chl_a_lag10d": 51.0,
+      "chl_a_growth_10d": 44.0,
+      "mean_depth_m": 33.0
+    }
+  },
+  "classification_results": {
+    "logistic_regression": {
+      "accuracy": 0.9577464788732394,
+      "precision": 0.7058823529411765,
+      "recall": 0.9230769230769231,
+      "f1_score": 0.8,
+      "roc_auc": 0.9803220035778175
+    },
+    "lightgbm_classifier": {
+      "accuracy": 0.9366197183098591,
+      "precision": 0.6,
+      "recall": 0.9230769230769231,
+      "f1_score": 0.7272727272727273,
+      "roc_auc": 0.9779367918902803
+    }
+  }
+}

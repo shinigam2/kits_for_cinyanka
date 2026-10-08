@@ -1,0 +1,88 @@
+# Конфигурация пилотных водных объектов Республики Беларусь
+# для интеллектуальной системы мониторинга и прогнозирования риска эвтрофикации
+
+project:
+  name: "water-eutrophication-belarus"
+  version: "1.0.0"
+  description: "Мониторинг, прогнозирование и раннее предупреждение эвтрофикации водных объектов Беларуси"
+  timezone: "Europe/Minsk"
+  date_range:
+    start_date: "2020-01-01"
+    end_date: "2025-12-31"
+
+water_bodies:
+  zaslavskoye:
+    id: "BY_RES_001"
+    name_ru: "Заславское водохранилище (Минское море)"
+    name_en: "Zaslavskoye Reservoir (Minsk Sea)"
+    type: "reservoir"
+    region: "Минская область, Минский район"
+    river_basin: "Днепр (р. Свислочь)"
+    coordinates:
+      lat: 53.9850
+      lon: 27.3800
+    bounding_box:
+      min_lon: 27.2800
+      min_lat: 53.9400
+      max_lon: 27.4600
+      max_lat: 54.0200
+    morphometry:
+      surface_area_km2: 25.6
+      mean_depth_m: 3.5
+      max_depth_m: 8.6
+      volume_million_m3: 108.5
+    eutrophication_profile:
+      trophic_status_baseline: "eutrophic"
+      critical_factors:
+        - "Мелководный быстрый прогрев"
+        - "Высокая рекреационная нагрузка"
+        - "Вспышки цианобактерий в июле-августе"
+      thresholds_chl_a_ug_l:
+        oligotrophic: [0.0, 2.5]
+        mesotrophic: [2.5, 8.0]
+        eutrophic: [8.0, 25.0]
+        hypereutrophic_bloom: 25.0
+
+  naroch:
+    id: "BY_LAKE_001"
+    name_ru: "Озеро Нарочь"
+    name_en: "Lake Naroch"
+    type: "lake"
+    region: "Минская область, Мядельский район (НП Нарочанский)"
+    river_basin: "Неман (р. Нарочь)"
+    coordinates:
+      lat: 54.8500
+      lon: 26.7800
+    bounding_box:
+      min_lon: 26.6800
+      min_lat: 54.8000
+      max_lon: 26.9200
+      max_lat: 54.9300
+    morphometry:
+      surface_area_km2: 79.6
+      mean_depth_m: 8.9
+      max_depth_m: 24.8
+      volume_million_m3: 710.0
+    eutrophication_profile:
+      trophic_status_baseline: "mesotrophic"
+      critical_factors:
+        - "Крупнейший водоем Беларуси с замедленным водообменом"
+        - "Связан с эвтрофными озерами Мястро и Баторино через р. Скема"
+        - "Эталонный научный полигон мониторинга"
+      thresholds_chl_a_ug_l:
+        oligotrophic: [0.0, 2.5]
+        mesotrophic: [2.5, 8.0]
+        eutrophic: [8.0, 25.0]
+        hypereutrophic_bloom: 25.0
+
+meteo_parameters:
+  source: "NASA_POWER"
+  temporal_resolution: "daily"
+  variables:
+    T2M: "Температура воздуха на высоте 2 м (°C)"
+    T2M_MAX: "Максимальная температура воздуха (°C)"
+    T2M_MIN: "Минимальная температура воздуха (°C)"
+    WS2M: "Скорость ветра на высоте 2 м (м/с)"
+    PRECTOTCORR: "Количество осадков с коррекцией (мм/день)"
+    ALLSKY_SFC_SW_DWN: "Суммарная солнечная радиация на поверхности (МДж/м²/день)"
+    RH2M: "Относительная влажность на высоте 2 м (%)"

@@ -1,0 +1,71 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix bywater: <http://w3id.org/belarus/water-quality#> .
+
+# ОНТОЛОГИЯ МОНИТОРИНГА И РАННЕГО ПРЕДУПРЕЖДЕНИЯ ЭВТРОФИКАЦИИ ВОДОЕМОВ БЕЛАРУСИ
+
+bywater:Ontology a owl:Ontology ;
+    rdfs:label "Онтология качества поверхностных вод и риска эвтрофикации (Беларусь)" ;
+    rdfs:comment "Основана на W3C SOSA/SSN, нормах СанПиН РБ и трофическом индексе Карлсона." ;
+    owl:versionInfo "1.0.0" .
+
+# КЛАССЫ
+bywater:WaterBody a owl:Class ;
+    rdfs:label "Водный объект" .
+
+bywater:Reservoir a owl:Class ;
+    rdfs:subClassOf bywater:WaterBody ;
+    rdfs:label "Водохранилище" .
+
+bywater:Lake a owl:Class ;
+    rdfs:subClassOf bywater:WaterBody ;
+    rdfs:label "Озеро" .
+
+bywater:EutrophicationAssessment a owl:Class ;
+    rdfs:subClassOf sosa:Observation ;
+    rdfs:label "Оценка риска эвтрофикации" .
+
+bywater:EarlyWarningAlert a owl:Class ;
+    rdfs:label "Предупреждение системы раннего оповещения" .
+
+bywater:TrophicClass a owl:Class ;
+    rdfs:label "Трофический класс водного объекта" .
+
+# СВОЙСТВА
+bywater:forWaterBody a owl:ObjectProperty ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range bywater:WaterBody .
+
+bywater:hasPredictedChlA a owl:DatatypeProperty ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float ;
+    rdfs:label "Прогнозируемая концентрация хлорофилла-a (мкг/л)" .
+
+bywater:hasBloomProbability a owl:DatatypeProperty ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float ;
+    rdfs:label "Модельная вероятность наступления цветения" .
+
+bywater:hasTrophicIndex a owl:DatatypeProperty ;
+    rdfs:domain bywater:EutrophicationAssessment ;
+    rdfs:range xsd:float ;
+    rdfs:label "Трофический индекс Карлсона (TSI)" .
+
+bywater:alertLevel a owl:DatatypeProperty ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string ;
+    rdfs:label "Уровень тревоги (GREEN, YELLOW, RED)" .
+
+bywater:explanationReason a owl:DatatypeProperty ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string ;
+    rdfs:label "Семантическое объяснение причин тревоги" .
+
+bywater:recommendedAction a owl:DatatypeProperty ;
+    rdfs:domain bywater:EarlyWarningAlert ;
+    rdfs:range xsd:string ;
+    rdfs:label "Рекомендованные природоохранные и санитарные действия" .
